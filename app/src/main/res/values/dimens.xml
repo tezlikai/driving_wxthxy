@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="gps_padding">50dp</dimen>
+</resources>

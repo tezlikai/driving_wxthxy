@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import com.lzy.widget.AlphaIndicator;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
+import com.wxthxy.driving.view.gps.GPSFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
 
         public MainAdapter(FragmentManager fm) {
             super(fm);
-            fragments.add(TextFragment.newInstance(titles[0]));
+            fragments.add(new GPSFragment());
             fragments.add(TextFragment.newInstance(titles[1]));
             fragments.add(TextFragment.newInstance(titles[2]));
             fragments.add(TextFragment.newInstance(titles[3]));

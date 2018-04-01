@@ -1,7 +1,6 @@
 package com.wxthxy.driving.view.splash;
 
 import android.Manifest;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -48,7 +47,7 @@ public class SplashActivity extends MVPBaseActivity<SplashContract.View, SplashP
 
         mTvSplash = (TextView) findViewById(R.id.tv_splash);
         isFrist = (boolean) SpUtils.get(this, AppConstants.SP_FIRSTOPEN, true);
-        if (isFrist){
+        if (isFrist) {
             checkPermissions();
         }
 
@@ -86,8 +85,10 @@ public class SplashActivity extends MVPBaseActivity<SplashContract.View, SplashP
 
     public void checkPermissions() {
         String[] parms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA};
-        SpUtils.put(this,AppConstants.SP_FIRSTOPEN,false);
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION};
+        SpUtils.put(this, AppConstants.SP_FIRSTOPEN, false);
         if (EasyPermissions.hasPermissions(this, parms)) {//设置权限
             //TODO: 有对应权限的操作
 
