@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
 import com.orhanobut.logger.Logger;
-import com.wxthxy.driving.base.GPSInformationBase;
+import com.wxthxy.driving.model.GPSInformationBase;
 import com.wxthxy.driving.mvp.BasePresenterImpl;
 
 import java.util.Iterator;

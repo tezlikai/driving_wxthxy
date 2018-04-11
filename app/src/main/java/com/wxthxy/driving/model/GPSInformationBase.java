@@ -1,4 +1,4 @@
-package com.wxthxy.driving.base;
+package com.wxthxy.driving.model;
 
 /**
  * Created by Administrator on 2018/3/31.

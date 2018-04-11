@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.wxthxy.driving.R;
-import com.wxthxy.driving.base.GPSInformationBase;
+import com.wxthxy.driving.model.GPSInformationBase;
 import com.wxthxy.driving.mvp.MVPBaseFragment;
 import com.wxthxy.driving.util.ToastUtil;
 import com.wxthxy.driving.view.custom.DashboardView;
@@ -29,23 +29,34 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
     private TextView mDirection;
     private View mStart;
     private View mEnd;
+    private View mView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initPrepare() {
+
+        mDashboardView = mView.findViewById(R.id.dashboard_view);
+        mDirection = mView.findViewById(R.id.direction_tv);
+        mStart = mView.findViewById(R.id.start_btn);
+        mEnd = mView.findViewById(R.id.end_btn);
+
+        mStart.setOnClickListener(this);
+        mEnd.setOnClickListener(this);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gps, container, false);
-        mDashboardView = view.findViewById(R.id.dashboard_view);
-        mDirection = view.findViewById(R.id.direction_tv);
-        mStart = view.findViewById(R.id.start_btn);
-        mStart.setOnClickListener(this);
-        mEnd = view.findViewById(R.id.end_btn);
-        mEnd.setOnClickListener(this);
-        return view;
+    protected void onInvisible() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mView = inflater.inflate(R.layout.fragment_gps, container, false);
+        return mView;
     }
 
     @Override

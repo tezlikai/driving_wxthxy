@@ -1,6 +1,6 @@
 package com.wxthxy.driving.view.gps;
 
-import com.wxthxy.driving.base.GPSInformationBase;
+import com.wxthxy.driving.model.GPSInformationBase;
 
 /**
  * Created by Administrator on 2018/3/31.
