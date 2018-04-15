@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.lzy.widget.AlphaIndicator;
 import com.wxthxy.driving.R;
+import com.wxthxy.driving.baiduSdk.SDKManager;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
 import com.wxthxy.driving.view.gps.GPSFragment;
 
@@ -25,6 +26,9 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         AlphaIndicator alphaIndicator = (AlphaIndicator) findViewById(R.id.alphaIndicator);
         alphaIndicator.setViewPager(viewPager);
+
+        //开启百度sdk定位
+        SDKManager.getInstance().initLocation(this);
     }
 
     private class MainAdapter extends FragmentPagerAdapter {

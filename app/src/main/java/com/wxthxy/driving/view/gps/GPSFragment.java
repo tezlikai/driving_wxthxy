@@ -63,7 +63,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start_btn:
-                mPresenter.initGPS();
+                mPresenter.getBaiduInfor();
                 mPresenter.setOnGPSInforListener(this);
                 showToast("开启GPS");
                 break;

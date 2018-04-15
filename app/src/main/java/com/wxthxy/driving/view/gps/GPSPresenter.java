@@ -13,7 +13,10 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
+import com.baidu.location.BDLocation;
 import com.orhanobut.logger.Logger;
+import com.wxthxy.driving.baiduSdk.OnBaiduInforListener;
+import com.wxthxy.driving.baiduSdk.SDKManager;
 import com.wxthxy.driving.model.GPSInformationBase;
 import com.wxthxy.driving.mvp.BasePresenterImpl;
 
@@ -23,7 +26,8 @@ import java.util.Iterator;
  * Created by Administrator on 2018/3/31.
  */
 
-public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements GPSContract.Presenter {
+public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements GPSContract.Presenter,
+        OnBaiduInforListener {
     /**
      * 设定一个标准值，两次方位值在标准范围内则说明方向未发生变化，否则判断方向
      */
@@ -82,6 +86,11 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
             mLocationManager.removeGpsStatusListener(gpsStatusListener);
             mLocationManager = null;
         }
+    }
+
+    @Override
+    public void getBaiduInfor() {
+        SDKManager.getInstance().setOnBaiduInforListener(this);
     }
 
     /**
@@ -235,5 +244,19 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
             previousBearing = bearing;
             return "直行";
         }
+    }
+
+    @Override
+    public void onBaiduInfor(BDLocation bdLocation) {
+        if (bdLocation == null){
+            Logger.e("百度定位返回null");
+            return;
+        }
+        int tempSpeed = (int) (bdLocation.getSpeed() * 3.6); // m/s --> Km/h
+        GPSInformationBase inforBase = new GPSInformationBase();
+        inforBase.setSpeed(tempSpeed);
+        inforBase.setBearing(bdLocation.getDirection());
+        inforBase.setDirection(null);
+        infor.onGPSInfor(inforBase);
     }
 }

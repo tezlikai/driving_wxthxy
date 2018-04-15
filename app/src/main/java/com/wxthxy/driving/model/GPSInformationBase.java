@@ -6,10 +6,19 @@ package com.wxthxy.driving.model;
 
 public class GPSInformationBase {
 
+    /**
+     * 速度
+     */
     private int speed;
 
+    /**
+     * 方位
+     */
     private float bearing;
 
+    /**
+     * 方向
+     */
     private String direction;
 
     public int getSpeed() {

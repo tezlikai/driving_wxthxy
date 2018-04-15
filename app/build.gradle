@@ -28,6 +28,12 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 def dbflow_version = "4.2.4"
 dependencies {
@@ -40,16 +46,13 @@ dependencies {
     compile 'com.lzy.widget:view-core:0.1.5'
     testCompile 'junit:junit:4.12'
     compile 'com.orhanobut:logger:2.1.1'
-
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-
     implementation 'pub.devrel:easypermissions:1.2.0'
     compile 'com.google.code.gson:gson:2.8.1'
-
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
-
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
-
+    compile files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/IndoorscapeAlbumPlugin.jar')
 }

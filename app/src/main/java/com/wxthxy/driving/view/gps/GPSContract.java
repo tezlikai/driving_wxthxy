@@ -16,5 +16,6 @@ public class GPSContract {
     interface Presenter extends BasePresenter<View>{
         void initGPS();
         void removeGPS();
+        void getBaiduInfor();
     }
 }
