@@ -17,6 +17,11 @@ public class SDKManager {
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private OnBaiduInforListener infor;
+    private MyOrientationListener myOrientationListener;
+    /**
+     * 方向传感器X方向的值
+     */
+    private float mXDirection;
 
     private SDKManager() {
     }
@@ -42,6 +47,23 @@ public class SDKManager {
 
         //注册监听函数
         mLocationClient.start();
+    }
+
+    /**
+     * 初始化方向传感器
+     */
+    public void initOritationListener(Context context) {
+        myOrientationListener = new MyOrientationListener(
+                context.getApplicationContext());
+        myOrientationListener
+                .setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+                    @Override
+                    public void onOrientationChanged(float x) {
+                        mXDirection =  x;
+                        Logger.d("方向" + x);
+                    }
+                });
+        myOrientationListener.start();
     }
 
     /**
@@ -126,6 +148,8 @@ public class SDKManager {
 
             int errorCode = bdLocation.getLocType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
+
+            bdLocation.setDirection(mXDirection);
 
             Logger.e(errorCode + "经纬度：" + latitude + " " + longitude + " 国家：" + bdLocation.getCountry() + " 城市：" + bdLocation.getCity() + " 速度:" + bdLocation.getSpeed() + " 方位：" + bdLocation.getDirection());
 

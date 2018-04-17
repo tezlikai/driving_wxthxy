@@ -27,6 +27,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         AlphaIndicator alphaIndicator = (AlphaIndicator) findViewById(R.id.alphaIndicator);
         alphaIndicator.setViewPager(viewPager);
 
+        SDKManager.getInstance().initOritationListener(this);
         //开启百度sdk定位
         SDKManager.getInstance().initLocation(this);
     }

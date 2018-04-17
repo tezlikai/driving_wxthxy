@@ -13,6 +13,8 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
@@ -50,6 +52,8 @@ public class TextFragment extends Fragment implements OnBaiduInforListener {
         mView = inflater.inflate(R.layout.fragment_location, container, false);
         mMapView = (MapView)mView.findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
+        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
+        mBaiduMap.setMapStatus(msu);
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         SDKManager.getInstance().setOnBaiduInforListener(this);
@@ -69,6 +73,7 @@ public class TextFragment extends Fragment implements OnBaiduInforListener {
         Logger.d("从百度地图定位到：方位"+bdLocation.getDirection()+" 速度"+bdLocation.getSpeed());
         if (bdLocation != null && mBaiduMap != null){
             final MyLocationData locationData = new MyLocationData.Builder().accuracy(bdLocation.getRadius()).
+                    accuracy(bdLocation.getRadius()).
                     direction(bdLocation.getDirection()).
                     latitude(bdLocation.getLatitude()).
                     longitude(bdLocation.getLongitude()).
@@ -78,7 +83,7 @@ public class TextFragment extends Fragment implements OnBaiduInforListener {
             // 设置定位图层的配置（定位模式，是否允许方向信息，用户自定义定位图标）
             BitmapDescriptor currentMarker = BitmapDescriptorFactory
                     .fromResource(R.mipmap.icon_geo);
-            MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, currentMarker);
+            MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, currentMarker);
             mBaiduMap.setMyLocationConfiguration(config);
         }
     }

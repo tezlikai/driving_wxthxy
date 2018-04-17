@@ -248,15 +248,15 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
 
     @Override
     public void onBaiduInfor(BDLocation bdLocation) {
-        if (bdLocation == null){
+        if (bdLocation == null) {
             Logger.e("百度定位返回null");
             return;
         }
         int tempSpeed = (int) (bdLocation.getSpeed() * 3.6); // m/s --> Km/h
         GPSInformationBase inforBase = new GPSInformationBase();
-        inforBase.setSpeed(tempSpeed);
+        inforBase.setSpeed((int)bdLocation.getSpeed());
         inforBase.setBearing(bdLocation.getDirection());
-        inforBase.setDirection(null);
+        inforBase.setDirection(String.valueOf(bdLocation.getSpeed()));
         infor.onGPSInfor(inforBase);
     }
 }
