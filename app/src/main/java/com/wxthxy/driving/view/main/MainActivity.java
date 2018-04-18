@@ -11,6 +11,7 @@ import com.wxthxy.driving.R;
 import com.wxthxy.driving.baiduSdk.SDKManager;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
 import com.wxthxy.driving.view.gps.GPSFragment;
+import com.wxthxy.driving.view.location.LocationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,6 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         AlphaIndicator alphaIndicator = (AlphaIndicator) findViewById(R.id.alphaIndicator);
         alphaIndicator.setViewPager(viewPager);
-
-        SDKManager.getInstance().initOritationListener(this);
-        //开启百度sdk定位
-        SDKManager.getInstance().initLocation(this);
     }
 
     private class MainAdapter extends FragmentPagerAdapter {
@@ -45,7 +42,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             super(fm);
             fragments.add(new GPSFragment());
             fragments.add(TextFragment.newInstance(titles[1]));
-            fragments.add(TextFragment.newInstance(titles[2]));
+            fragments.add(new LocationFragment());
             fragments.add(TextFragment.newInstance(titles[3]));
         }
 
@@ -58,5 +55,17 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         public int getCount() {
             return fragments.size();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SDKManager.getInstance().startLocation(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SDKManager.getInstance().stopLocation();
     }
 }

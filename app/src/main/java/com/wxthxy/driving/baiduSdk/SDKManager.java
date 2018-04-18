@@ -35,11 +35,28 @@ public class SDKManager {
     }
 
     /**
+     * 开启百度定位和方向传感器
+     * @param context
+     */
+    public void startLocation(Context context){
+        initOritationListener(context);
+        initLocation(context);
+    }
+
+    /**
+     * 停止百度定位和方向传感器
+     */
+    public void stopLocation(){
+        mLocationClient.stop();
+        myOrientationListener.stop();
+    }
+
+    /**
      * 初始化百度定位
      *
      * @param context
      */
-    public void initLocation(Context context) {
+    private void initLocation(Context context) {
         mLocationClient = new LocationClient(context.getApplicationContext());
         configurationParams();
         //声明LocationClient类
@@ -52,7 +69,7 @@ public class SDKManager {
     /**
      * 初始化方向传感器
      */
-    public void initOritationListener(Context context) {
+    private void initOritationListener(Context context) {
         myOrientationListener = new MyOrientationListener(
                 context.getApplicationContext());
         myOrientationListener
