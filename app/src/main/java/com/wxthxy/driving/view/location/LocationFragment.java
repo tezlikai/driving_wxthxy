@@ -26,7 +26,7 @@ import com.wxthxy.driving.mvp.MVPBaseFragment;
  * Created by Administrator on 2018/4/15.
  */
 
-public class LocationFragment extends MVPBaseFragment<LocationContract.View, LocationPresenter> implements OnBaiduInforListener {
+public class LocationFragment extends MVPBaseFragment<LocationContract.View, LocationPresenter> implements LocationContract.View, OnBaiduInforListener {
     private View mView;
     private MapView mMapView;
     private BaiduMap mBaiduMap;
@@ -55,7 +55,6 @@ public class LocationFragment extends MVPBaseFragment<LocationContract.View, Loc
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        SDKInitializer.initialize(this.getActivity().getApplication());
         mView = inflater.inflate(R.layout.fragment_location, container, false);
         return mView;
     }

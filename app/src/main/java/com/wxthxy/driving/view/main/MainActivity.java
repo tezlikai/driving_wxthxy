@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.jaeger.library.StatusBarUtil;
 import com.lzy.widget.AlphaIndicator;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.baiduSdk.SDKManager;
@@ -22,7 +23,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         AlphaIndicator alphaIndicator = (AlphaIndicator) findViewById(R.id.alphaIndicator);

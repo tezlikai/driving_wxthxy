@@ -3,6 +3,7 @@ package com.wxthxy.driving.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
@@ -32,6 +33,8 @@ public class MyApp extends Application {
                 return BuildConfig.DEBUG;
             }
         });
+
+        SDKInitializer.initialize(this);
     }
 
     /**

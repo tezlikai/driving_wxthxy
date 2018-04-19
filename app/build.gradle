@@ -63,5 +63,6 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.jaeger.statusbarutil:library:1.5.0'
     implementation files('libs/IndoorscapeAlbumPlugin.jar')
 }
