@@ -1,10 +1,13 @@
 package com.wxthxy.driving.view.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.lzy.widget.AlphaIndicator;
@@ -13,6 +16,7 @@ import com.wxthxy.driving.baiduSdk.SDKManager;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
 import com.wxthxy.driving.view.gps.GPSFragment;
 import com.wxthxy.driving.view.location.LocationFragment;
+import com.wxthxy.driving.view.me.MeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
             fragments.add(new GPSFragment());
             fragments.add(TextFragment.newInstance(titles[1]));
             fragments.add(new LocationFragment());
-            fragments.add(TextFragment.newInstance(titles[3]));
+            fragments.add(new MeFragment());
         }
 
         @Override
@@ -68,5 +72,29 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
     protected void onStop() {
         super.onStop();
         SDKManager.getInstance().stopLocation();
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (doubleBackToExit) {
+                exitDialog();
+                return true;
+            }
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            this.doubleBackToExit = true;
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExit = false;
+
+                }
+            }, 2000);
+
+            return false;
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 }

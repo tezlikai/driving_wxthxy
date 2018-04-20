@@ -48,7 +48,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Base">
 
         <!-- AK鉴权 -->
         <!-- meta-data需要写在application中 -->
@@ -75,6 +75,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.me.aboutHibeauty.AboutHibeautyActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.me.contactUs.ContactUsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.me.helpCenter.HelpCenterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.me.setting.SettingActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

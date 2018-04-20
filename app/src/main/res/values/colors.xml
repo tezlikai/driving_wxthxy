@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
     <color name="color_red">#FF5722</color>
     <color name="color_orange">#FF9800</color>
@@ -12,4 +9,139 @@
     <color name="color_dark">#263238</color>
     <color name="color_dark_light">#455A64</color>
     <color name="color_light">#ECEFF1</color>
+
+    <color name="colorPrimary">#3278fa</color>
+    <color name="colorPrimaryDark">#3278fa</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimaryStart">#103278fa</color>
+    <color name="colorPrimaryEnd">#403278fa</color>
+    <color name="blue">#18B4ED</color>
+    <color name="black">#000000</color>
+    <color name="white_drak">#D0EFFA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#ff0000</color>
+    <color name="orange">#ff7800</color>
+    <color name="gray">#9C9D9F</color>
+    <color name="gray_bg">#f6f9fe</color>
+    <color name="gray_item_select">#f3f3f3</color>
+    <color name="blue_edit_bg">#6bb6f9</color>
+    <color name="text_del">#ff7800</color>
+    <color name="gray_light_common">#FFF5F8FD</color>
+    <color name="transparent">#00000000</color>
+    <color name="blackhalftransparent">#e0000000</color>
+    <color name="touchable_background_white">#8496a0</color>
+
+    <color name="my_dialog_bg_default">#ffffff</color>
+    <color name="my_dialog_bg_press">#e6e6e6</color>
+    <color name="treat_detail_title_bg">#edf5ff</color>
+    <color name="treat_saved">#ffa994</color>
+    <color name="treat_has_upload">#325ea3</color>
+    <color name="treat_to_be_add">#bd419c</color>
+    <color name="treat_simulation_to_be_uploaded_color">#6c50c8</color>
+    <color name="treat_simulation_has_uploaded_color">#f33a44</color>
+    <color name="later_form_title_bg">#FF88A1BE</color>
+    <color name="later_form_title_bord">#FFF3F4F9</color>
+    <color name="later_form_title_item_bg">#FFF1F2F1</color>
+    <color name="order_successful">#4eaaf5</color>
+
+    <color name="bg_gray_over">#cecece</color>
+    <color name="bg_suggest">#f1f1f1</color>
+
+
+    <color name="overall_style">#3278fa</color>
+
+    <color name="submit_hospital_select">#2d6ec0</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="green">#45C01A</color>
+
+    <color name="account_login_hint">#bbbbbb</color>
+
+    <color name="login_btn_pre">#98bbf3</color>
+
+    <color name="login_btn_after">#3278fa</color>
+
+    <color name="timeline_latest_state">#ff7a03</color>
+    <color name="timeline_title">#666666</color>
+
+    <color name="touchable_background">#eeeeee</color>
+
+    <color name="footText_color">#8d8d8d</color>
+
+    <!-- FloatButton -->
+    <color name="app_primary_float_button">#1976D2</color>
+    <color name="app_primary_dark_float_button">#1565C0</color>
+
+    <!-- commonDialog -->
+    <color name="mainColor">#573567</color>
+    <color name="font_gray_b">#d4d4d3</color>
+    <color name="font_tab_1">#42369a</color>
+    <color name="font_tab_0">#b1b1b1</color>
+    <color name="font_common_1">#424242</color>
+    <color name="font_common_2">#a1a1a1</color>
+    <color name="font_blue">#42369a</color>
+    <color name="font_green">#00cccc</color>
+    <color name="commom_background">#f3f3f3</color>
+
+    <!-- suggest page -->
+    <color name="suggest_submit_no_input">#98bbfc</color>
+    <color name="suggest_submit_have_input">#3278fa</color>
+    <color name="suggest_submit_click">#2d6ce0</color>
+    <color name="submit_textview">#99BCFA</color>
+
+    <!-- common -->
+    <color name="c0">#ff000000</color>
+    <color name="c1">#D9000000</color>
+    <color name="c2">#8C000000</color>
+    <color name="c3">#66000000</color>
+    <color name="c4">#1A000000</color>
+    <color name="c5">#C34A42</color>
+    <color name="c6">#FF9800</color>
+    <color name="c7">#009734</color>
+    <color name="c8">#46AE36</color>
+    <color name="c9">#47B000</color>
+    <color name="c10">#007AFF</color>
+    <color name="c11">#1194F6</color>
+    <color name="c12">#9D1BB2</color>
+
+    <color name="transparent05">#0B000000</color>
+    <color name="transparent10">#1A000000</color>
+    <color name="transparent20">#33000000</color>
+    <color name="transparent30">#4D000000</color>
+    <color name="transparent40">#66000000</color>
+    <color name="transparent50">#80000000</color>
+    <color name="transparent60">#9A000000</color>
+    <color name="transparent70">#B3000000</color>
+    <color name="transparent80">#CC000000</color>
+    <color name="transparent90">#E5000000</color>
+    <color name="transparent100">#FF000000</color>
+    <color name="transparent110">#e5e5e5</color>
+
+    <color name="transparent_white">#00ffffff</color>
+    <color name="transparent10_white">#1Affffff</color>
+    <color name="transparent20_white">#33ffffff</color>
+    <color name="transparent30_white">#4Dffffff</color>
+    <color name="transparent40_white">#66ffffff</color>
+    <color name="transparent50_white">#80ffffff</color>
+    <color name="transparent60_white">#9Affffff</color>
+    <color name="transparent70_white">#B3ffffff</color>
+    <color name="transparent80_white">#CCffffff</color>
+    <color name="transparent90_white">#E5ffffff</color>
+    <color name="transparent100_white">#FFffffff</color>
+
+    <color name="transparent_gray">#009C9D9F</color>
+    <color name="transparent10_gray">#1A9C9D9F</color>
+    <color name="transparent20_gray">#339C9D9F</color>
+    <color name="transparent30_gray">#4D9C9D9F</color>
+    <color name="transparent40_gray">#669C9D9F</color>
+    <color name="transparent50_gray">#809C9D9F</color>
+    <color name="transparent60_gray">#9A9C9D9F</color>
+    <color name="transparent70_gray">#B39C9D9F</color>
+    <color name="transparent80_gray">#CC9C9D9F</color>
+    <color name="transparent90_gray">#E59C9D9F</color>
+    <color name="transparent100_gray">#FF9C9D9F</color>
+
+    <color name="placeholder_color">#1A000000</color>
 </resources>

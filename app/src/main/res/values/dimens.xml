@@ -1,3 +1,86 @@
 <resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="gps_padding">50dp</dimen>
+    <dimen name="toolBarPaddingTop">0dp</dimen>
+    <dimen name="toolBarHeight">50dp</dimen>
+
+    <dimen name="txt_size_hugeX">35sp</dimen>
+    <dimen name="txt_size_hugeX_small">28sp</dimen>
+    <dimen name="txt_size_huge">25sp</dimen>
+    <dimen name="txt_size_large">20sp</dimen>
+    <dimen name="txt_size_normal">18sp</dimen>
+    <dimen name="txt_size_big">15sp</dimen>
+    <dimen name="txt_size_mid">13.5sp</dimen>
+    <dimen name="txt_size_small">12sp</dimen>
+    <dimen name="txt_size_smaller">10sp</dimen>
+    <dimen name="float_edit_size_small">8sp</dimen>
+    <dimen name="float_size_small">6sp</dimen>
+
+    <dimen name="spacing">5dp</dimen>
+
+
+    <dimen name="menu_divider_height">1dip</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="refresh_header_height_tc">80dp</dimen>
+    <dimen name="load_more_footer_height_classic">40dp</dimen>
+
+
+    <!-- dialog -->
+    <dimen name="dialog_min_width">250dip</dimen>
+    <dimen name="dialog_min_height">150dip</dimen>
+    <dimen name="dialog_title_margin">21.5dip</dimen>
+    <dimen name="dialog_content_margin_top">0dip</dimen>
+    <dimen name="dialog_content_margin_buttom">17.5dip</dimen>
+    <dimen name="dialog_bn_margin_height">58.5dip</dimen>
+
+    <!-- Layout border gap -->
+    <dimen name="layout_border_large_gap">20dip</dimen>
+    <dimen name="layout_border_big_gap">15dip</dimen>
+    <dimen name="layout_border_gap">10dip</dimen>
+    <dimen name="layout_border_small_gap">3dip</dimen>
+    <dimen name="layout_border_supper_small_gap">2dip</dimen>
+    <!-- Layout dialog frame -->
+    <dimen name="update_dialog_width">300dip</dimen>
+
+
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_7">7dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_9">9dp</dimen>
+
+
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_13">13dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_17">17dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_19">19dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
+    <dimen name="dp_28">28dp</dimen>
+
+    <dimen name="dp_30">30dp</dimen>
+
+    <dimen name="dp_50">50dp</dimen>
+
+    <dimen name="dp_100">100dp</dimen>
+
+
+
+
 </resources>

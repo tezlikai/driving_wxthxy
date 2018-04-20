@@ -4,9 +4,12 @@ import android.app.Application;
 import android.content.Context;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.google.gson.annotations.Until;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
+import com.wxthxy.driving.util.TUtil;
+import com.wxthxy.driving.util.Utils;
 
 /**
  * Created by lk on 18-3-17.
@@ -35,6 +38,8 @@ public class MyApp extends Application {
         });
 
         SDKInitializer.initialize(this);
+
+        Utils.init(this);
     }
 
     /**
