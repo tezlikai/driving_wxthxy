@@ -7,5 +7,9 @@ import com.wxthxy.driving.model.GPSInformationBase;
  */
 
 public interface OnGPSInforListener {
+    /**
+     * 百度定位SDK返回的信息
+     * @param infor
+     */
     void onGPSInfor(GPSInformationBase infor);
 }

@@ -7,10 +7,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 /**
+ * 由于百度的方位direction获取的是手机面朝正北是的方向，不是水平手机方向，与需求不符
+ * 所以需要通过监听手机本身的方向传感器来替代百度的方向
  * Created by Administrator on 2018/4/17.
  */
 
-public class MyOrientationListener implements SensorEventListener {
+public class PhoneOrientationListener implements SensorEventListener {
     private Context context;
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -19,11 +21,13 @@ public class MyOrientationListener implements SensorEventListener {
 
     private OnOrientationListener onOrientationListener;
 
-    public MyOrientationListener(Context context) {
+    public PhoneOrientationListener(Context context) {
         this.context = context;
     }
 
-    // 开始
+    /**
+     * 开启手机方向传感器
+     */
     public void start() {
         // 获得传感器管理器
         sensorManager = (SensorManager) context
@@ -40,7 +44,9 @@ public class MyOrientationListener implements SensorEventListener {
 
     }
 
-    // 停止检测
+    /**
+     * 停止传感器监测
+     */
     public void stop() {
         sensorManager.unregisterListener(this);
     }
@@ -70,9 +76,7 @@ public class MyOrientationListener implements SensorEventListener {
         this.onOrientationListener = onOrientationListener;
     }
 
-
     public interface OnOrientationListener {
         void onOrientationChanged(float x);
     }
-
 }

@@ -11,12 +11,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 
 import com.baidu.location.BDLocation;
 import com.orhanobut.logger.Logger;
 import com.wxthxy.driving.baiduSdk.OnBaiduInforListener;
 import com.wxthxy.driving.baiduSdk.SDKManager;
+import com.wxthxy.driving.common.AppConstants;
 import com.wxthxy.driving.model.GPSInformationBase;
 import com.wxthxy.driving.mvp.BasePresenterImpl;
 
@@ -33,6 +35,20 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
      */
     private static final float STANDARD_ANGLE = 10f;
 
+    /**
+     * 判断是否调头的警戒值
+     */
+    private static final float TRUN_HEAD_VIGILANCE = 160f;
+
+    /**
+     * 一个时间间隔，记录这个时间段内的方位用于处理是否调头
+     */
+    private static final int TIME_DELAY = 5 * 1000;
+
+    private static final float DEFAULT_VALUE_ZERO = 0f;
+
+    private static final float DEFAULT_VALUE_NEGATIVE = -1f;
+
     public String[] parms = {Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION};
 
@@ -43,12 +59,46 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
     /**
      * 记录上一次方位
      */
-    private float previousBearing = 0f;
+    private float previousBearing = DEFAULT_VALUE_ZERO;
+
+    /**
+     * 同样是记录上一次方位，但是第一次默认为-1
+     */
+    private float mNextBearing = DEFAULT_VALUE_NEGATIVE;
+
+    private float num = 0;
+
+    private boolean isTurnHead = false;
 
     public void setOnGPSInforListener(OnGPSInforListener infor) {
         this.infor = infor;
     }
 
+    private Handler mHandler = new Handler();
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            Logger.d("每隔" + TIME_DELAY + "秒监测是否调头 num = " + num);
+            if (num >= TRUN_HEAD_VIGILANCE) {
+                Logger.d("监测到大于警戒值 " + num);
+                isTurnHead = true;
+            } else if (-num >= TRUN_HEAD_VIGILANCE) {
+                Logger.d("监测到大于警戒值 " + num);
+                isTurnHead = true;
+            } else {
+                Logger.d("监测到小于警戒值 " + num);
+                isTurnHead = false;
+            }
+
+            num = 0;
+            mHandler.postDelayed(this, TIME_DELAY);
+        }
+    };
+
+    /**
+     * 此方案为直接调用手机GPS功能实现定位，但由于GPS受环境因素影响太大，无法在实际场景中应用，所以暂时未能使用到该方法
+     */
     @Override
     public void initGPS() {
         mLocationManager = (LocationManager) mView.getContext().getSystemService(Context.LOCATION_SERVICE); // 位置
@@ -86,11 +136,14 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
             mLocationManager.removeGpsStatusListener(gpsStatusListener);
             mLocationManager = null;
         }
+        if (mHandler != null && runnable != null)
+            mHandler.removeCallbacks(runnable);
     }
 
     @Override
     public void getBaiduInfor() {
         SDKManager.getInstance().setOnBaiduInforListener(this);
+        vigilanceMonitor();
     }
 
     /**
@@ -216,7 +269,7 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
         // getTime():时刻
         int tempSpeed = (int) (location.getSpeed() * 3.6); // m/s --> Km/h
         float bearing = location.getBearing();
-        String dir = changeBearingToDirection(bearing);
+        int dir = changeBearingToDirection(bearing);
 
         Logger.i("Speed:" + tempSpeed + " bearing:" + bearing);
 
@@ -227,36 +280,73 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
         infor.onGPSInfor(inforBase);
     }
 
-    private String changeBearingToDirection(float bearing) {
+    /**
+     * 将百度定位SDK返回的速度值转换成所需要的string值（转弯）
+     *
+     * @param bearing
+     * @return 左右转弯或者直行
+     */
+    private int changeBearingToDirection(float bearing) {
         if (previousBearing != 0f) {
-            //向右方
             if (bearing - previousBearing >= STANDARD_ANGLE) {
                 previousBearing = bearing;
-                return "右拐";
+                return AppConstants.TRUN_RIGHT;
             } else if (previousBearing - bearing > STANDARD_ANGLE) {
                 previousBearing = bearing;
-                return "左拐";
+                return AppConstants.TRUN_LEFT;
             } else {
                 previousBearing = bearing;
-                return "直行";
+                return AppConstants.STRAIGHT_LINE;
             }
         } else {
             previousBearing = bearing;
-            return "直行";
+            return AppConstants.STRAIGHT_LINE;
         }
     }
 
+    /**
+     * 每次从百度SDK拿到方位的值都与上次存的值比较，并差值相加
+     *
+     * @param bearing
+     */
+    private void monitorTurnHead(float bearing) {
+        if (mNextBearing != DEFAULT_VALUE_NEGATIVE) {//mNextBearing被赋过值
+            //记录每次差值并相加，当到达计算时间时如果num值可以作为判断
+            num = num + bearing - mNextBearing;
+            Logger.d("每次差值相加 num = " + num);
+        }
+        //将当前bearing赋给mNextBearing
+        mNextBearing = bearing;
+        Logger.d("mNextBearing = " + mNextBearing);
+    }
+
+    /**
+     * 通过判断一段时间内方位的变化来判断车辆是否调头
+     */
+    private void vigilanceMonitor() {
+        mHandler.postDelayed(runnable, TIME_DELAY);
+    }
+
+    /**
+     * 百度定位SDK的定位结果返回
+     *
+     * @param bdLocation
+     */
     @Override
     public void onBaiduInfor(BDLocation bdLocation) {
         if (bdLocation == null) {
             Logger.e("百度定位返回null");
             return;
         }
-        int tempSpeed = (int) (bdLocation.getSpeed() * 3.6); // m/s --> Km/h
+
+        monitorTurnHead(bdLocation.getDirection());
+
         GPSInformationBase inforBase = new GPSInformationBase();
-        inforBase.setSpeed((int)bdLocation.getSpeed());
-        inforBase.setBearing(bdLocation.getDirection());
-        inforBase.setDirection(String.valueOf(bdLocation.getSpeed()));
+        inforBase.setSpeed((int) bdLocation.getSpeed());//速度
+        inforBase.setBearing(bdLocation.getDirection());//方位
+        int dir = changeBearingToDirection(bdLocation.getDirection());
+        inforBase.setDirection(dir);//方向
+        inforBase.setTurnHead(isTurnHead);
         infor.onGPSInfor(inforBase);
     }
 }

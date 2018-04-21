@@ -85,7 +85,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
         if (mDashboardView != null) {
             mDashboardView.setVelocity(infor.getSpeed());
         }
-        if (mDirection != null && !TextUtils.isEmpty(infor.getDirection())) {
+        if (mDirection != null) {
             mDirection.setText(infor.getDirection());
         }
         showToast(infor.toString());

@@ -19,7 +19,9 @@ public class GPSInformationBase {
     /**
      * 方向
      */
-    private String direction;
+    private int direction;
+
+    private boolean isTurnHead;
 
     public int getSpeed() {
         return speed;
@@ -37,12 +39,20 @@ public class GPSInformationBase {
         this.bearing = bearing;
     }
 
-    public String getDirection() {
+    public int getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(int direction) {
         this.direction = direction;
+    }
+
+    public boolean isTurnHead() {
+        return isTurnHead;
+    }
+
+    public void setTurnHead(boolean turnHead) {
+        isTurnHead = turnHead;
     }
 
     @Override
@@ -50,7 +60,8 @@ public class GPSInformationBase {
         return "GPSInformationBase{" +
                 "speed=" + speed +
                 ", bearing=" + bearing +
-                ", direction='" + direction + '\'' +
+                ", direction=" + direction +
+                ", isTurnHead=" + isTurnHead +
                 '}';
     }
 }

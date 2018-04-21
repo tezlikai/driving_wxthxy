@@ -15,9 +15,9 @@ import com.orhanobut.logger.Logger;
 public class SDKManager {
 
     public LocationClient mLocationClient = null;
-    private MyLocationListener myListener = new MyLocationListener();
+    private BaiduLocationListener bdListener = new BaiduLocationListener();
     private OnBaiduInforListener infor;
-    private MyOrientationListener myOrientationListener;
+    private PhoneOrientationListener phoneOrientationListener;
     /**
      * 方向传感器X方向的值
      */
@@ -39,7 +39,9 @@ public class SDKManager {
      * @param context
      */
     public void startLocation(Context context){
-        initOritationListener(context);
+        //初始化手机方向传感器，并开启传感器监听
+        initOrientationListener(context);
+        //初始化百度定位SDK，并开启监听
         initLocation(context);
     }
 
@@ -48,43 +50,42 @@ public class SDKManager {
      */
     public void stopLocation(){
         mLocationClient.stop();
-        myOrientationListener.stop();
+        phoneOrientationListener.stop();
     }
 
     /**
-     * 初始化百度定位
-     *
+     * 初始化百度定位SDK，并开启监听
      * @param context
      */
     private void initLocation(Context context) {
         mLocationClient = new LocationClient(context.getApplicationContext());
         configurationParams();
         //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener);
+        mLocationClient.registerLocationListener(bdListener);
 
         //注册监听函数
         mLocationClient.start();
     }
 
     /**
-     * 初始化方向传感器
+     * 初始化手机方向传感器，并开启传感器监听
      */
-    private void initOritationListener(Context context) {
-        myOrientationListener = new MyOrientationListener(
+    private void initOrientationListener(Context context) {
+        phoneOrientationListener = new PhoneOrientationListener(
                 context.getApplicationContext());
-        myOrientationListener
-                .setOnOrientationListener(new MyOrientationListener.OnOrientationListener() {
+        phoneOrientationListener
+                .setOnOrientationListener(new PhoneOrientationListener.OnOrientationListener() {
                     @Override
                     public void onOrientationChanged(float x) {
                         mXDirection =  x;
                         Logger.d("方向" + x);
                     }
                 });
-        myOrientationListener.start();
+        phoneOrientationListener.start();
     }
 
     /**
-     * 设置参数
+     * 设置百度定位SDK参数
      */
     private void configurationParams() {
         LocationClientOption option = new LocationClientOption();
@@ -141,9 +142,9 @@ public class SDKManager {
     }
 
     /**
-     * 回调监听
+     * 监听百度定位SDK的回调
      */
-    private class MyLocationListener extends BDAbstractLocationListener {
+    private class BaiduLocationListener extends BDAbstractLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
@@ -166,6 +167,7 @@ public class SDKManager {
             int errorCode = bdLocation.getLocType();
             //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
 
+            //设置手机方向传感器方位作为所需参数上传给上层回调
             bdLocation.setDirection(mXDirection);
 
             Logger.e(errorCode + "经纬度：" + latitude + " " + longitude + " 国家：" + bdLocation.getCountry() + " 城市：" + bdLocation.getCity() + " 速度:" + bdLocation.getSpeed() + " 方位：" + bdLocation.getDirection());
@@ -177,6 +179,10 @@ public class SDKManager {
         }
     }
 
+    /**
+     * 监测和定位两个模块需要百度定位SDK信息
+     * @param infor
+     */
     public void setOnBaiduInforListener(OnBaiduInforListener infor) {
         this.infor = infor;
     }
