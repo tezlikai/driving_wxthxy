@@ -314,6 +314,15 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
             //记录每次差值并相加，当到达计算时间时如果num值可以作为判断
             num = num + bearing - mNextBearing;
             Logger.d("每次差值相加 num = " + num);
+            if (num >= TRUN_HEAD_VIGILANCE) {
+                Logger.d("监测到大于警戒值 " + num);
+                isTurnHead = true;
+                num = 0;
+            } else if (-num >= TRUN_HEAD_VIGILANCE) {
+                Logger.d("监测到大于警戒值 " + num);
+                isTurnHead = true;
+                num = 0;
+            }
         }
         //将当前bearing赋给mNextBearing
         mNextBearing = bearing;

@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:background="@color/color_dark">
 
     <com.wxthxy.driving.view.custom.DashboardView
         android:id="@+id/dashboard_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/gps_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/gps_padding" />
 
     <TextView
-        android:id="@+id/direction_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dashboard_view" />
-
-    <Button
-        android:id="@+id/start_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="41dp"
-        android:text="开始"
-        app:layout_constraintBottom_toTopOf="@+id/end_btn"
-        app:layout_constraintStart_toStartOf="@+id/end_btn" />
-
-    <Button
         android:id="@+id/end_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="85dp"
-        android:text="结束"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/gps_start_end_selected"
+        android:gravity="center"
+        android:text="结束" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/end_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/gps_start_end_selected"
+        android:gravity="center"
+        android:text="开始" />
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/start_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp">
+
+        <ImageView
+            android:id="@+id/direction_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/gps_left" />
+
+        <ImageView
+            android:id="@+id/direction_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/gps_head" />
+
+        <ImageView
+            android:id="@+id/direction_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/gps_right" />
+
+    </RelativeLayout>
+</RelativeLayout>
