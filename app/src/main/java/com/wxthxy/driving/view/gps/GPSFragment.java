@@ -68,12 +68,17 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start_btn:
+                mStart.setBackgroundResource(R.mipmap.gps_btn_on);
+                mEnd.setBackgroundResource(R.mipmap.gps_btn);
                 mPresenter.getBaiduInfor();
                 mPresenter.setOnGPSInforListener(this);
                 showToast("开启GPS");
                 break;
             case R.id.end_btn:
-                mPresenter.removeGPS();
+                mStart.setBackgroundResource(R.mipmap.gps_btn);
+                mEnd.setBackgroundResource(R.mipmap.gps_btn_on);
+                mPresenter.setOnGPSInforListener(null);
+//                mPresenter.removeGPS();
                 showToast("关闭GPS");
                 break;
         }
@@ -107,7 +112,10 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.removeGPS();
+        mStart.setBackgroundResource(R.mipmap.gps_btn);
+        mEnd.setBackgroundResource(R.mipmap.gps_btn);
+//        mPresenter.removeGPS();
+        mPresenter.setOnGPSInforListener(null);
     }
 
     /**
@@ -119,8 +127,10 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
     private void dealDirectionDisplay(int direction, boolean isTurnHead) {
         if (direction == AppConstants.TRUN_RIGHT) {
             mRightImg.setBackgroundResource(R.mipmap.gps_right_on);
+            mLeftImg.setBackgroundResource(R.mipmap.gps_left);
         } else if (direction == AppConstants.TRUN_LEFT) {
             mLeftImg.setBackgroundResource(R.mipmap.gps_left_on);
+            mRightImg.setBackgroundResource(R.mipmap.gps_right);
         } else if (direction == AppConstants.STRAIGHT_LINE) {
             mRightImg.setBackgroundResource(R.mipmap.gps_right);
             mLeftImg.setBackgroundResource(R.mipmap.gps_left);

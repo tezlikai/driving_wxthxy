@@ -28,7 +28,7 @@
         android:layout_above="@id/end_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/gps_start_end_selected"
+        android:background="@mipmap/gps_btn"
         android:gravity="center"
         android:text="开始" />
 
