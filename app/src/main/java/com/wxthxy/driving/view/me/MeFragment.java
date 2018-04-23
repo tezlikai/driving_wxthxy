@@ -66,7 +66,6 @@ public class MeFragment extends MVPBaseFragment<MeContract.View, MePresenter> im
         switch (view.getId()) {
 
             case R.id.rl_help_center:
-
                 toJumpPage(HelpCenterActivity.class);
                 break;
             case R.id.rl_contact_us:

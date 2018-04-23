@@ -17,6 +17,7 @@ import com.wxthxy.driving.mvp.MVPBaseActivity;
 import com.wxthxy.driving.view.gps.GPSFragment;
 import com.wxthxy.driving.view.location.LocationFragment;
 import com.wxthxy.driving.view.me.MeFragment;
+import com.wxthxy.driving.view.record.RecordFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresent
         public MainAdapter(FragmentManager fm) {
             super(fm);
             fragments.add(new GPSFragment());
-            fragments.add(TextFragment.newInstance(titles[1]));
+            fragments.add(new RecordFragment());
             fragments.add(new LocationFragment());
             fragments.add(new MeFragment());
         }
