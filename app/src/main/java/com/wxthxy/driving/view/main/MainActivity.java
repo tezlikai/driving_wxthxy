@@ -23,15 +23,18 @@ import java.util.List;
 
 public class MainActivity extends MVPBaseActivity<MainContract.View, MainPresenter> implements MainContract.View {
 
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, null);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         AlphaIndicator alphaIndicator = (AlphaIndicator) findViewById(R.id.alphaIndicator);
-        alphaIndicator.setViewPager(viewPager);
+        alphaIndicator.setViewPager(mViewPager);
     }
 
     private class MainAdapter extends FragmentPagerAdapter {

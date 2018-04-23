@@ -27,12 +27,18 @@ import com.wxthxy.driving.mvp.MVPBaseFragment;
  */
 
 public class LocationFragment extends MVPBaseFragment<LocationContract.View, LocationPresenter> implements LocationContract.View, OnBaiduInforListener {
+
+    private static final String TAG = LocationFragment.class.getSimpleName();
+
     private View mView;
     private MapView mMapView;
     private BaiduMap mBaiduMap;
 
     @Override
     protected void initPrepare() {
+
+        Logger.w(TAG,"initPrepare...");
+
         mMapView = (MapView) mView.findViewById(R.id.bmapView);
 
         mBaiduMap = mMapView.getMap();
@@ -45,11 +51,12 @@ public class LocationFragment extends MVPBaseFragment<LocationContract.View, Loc
 
     @Override
     protected void onInvisible() {
-
+        Logger.w(TAG,"onInvisible...");
     }
 
     @Override
     protected void initData() {
+        Logger.w(TAG,"initData...");
 
     }
 

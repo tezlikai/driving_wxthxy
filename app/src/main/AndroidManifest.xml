@@ -54,7 +54,11 @@
         <!-- meta-data需要写在application中 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="VRuermuvS5jI369rR7eSfGQaLAh4CtUu" />  <!-- http://lbsyun.baidu.com/apiconsole/key -->
+            android:value="68Ta7tZG2SMLvNYk8CTKTlKWO9h9rBGu" />  <!-- http://lbsyun.baidu.com/apiconsole/key -->
+
+        <!--<meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="VRuermuvS5jI369rR7eSfGQaLAh4CtUu" />-->  <!-- http://lbsyun.baidu.com/apiconsole/key -->
 
         <activity
             android:name=".view.main.MainActivity"
