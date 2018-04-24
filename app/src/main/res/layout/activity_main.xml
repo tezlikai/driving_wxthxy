@@ -26,48 +26,48 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            app:av_tabIconNormal="@mipmap/home_normal"
-            app:av_tabIconSelected="@mipmap/home_selected"
+            app:av_tabIconNormal="@mipmap/ic_detection_normal"
+            app:av_tabIconSelected="@mipmap/ic_detection"
             app:av_tabText="监测"
             app:av_tabTextSize="14sp"
             app:av_textColorNormal="#999999"
-            app:av_textColorSelected="#46c01b"/>
+            app:av_textColorSelected="#1296db"/>
 
         <com.lzy.widget.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            app:av_tabIconNormal="@mipmap/category_normal"
-            app:av_tabIconSelected="@mipmap/category_selected"
+            app:av_tabIconNormal="@mipmap/ic_record_normal"
+            app:av_tabIconSelected="@mipmap/ic_record"
             app:av_tabText="记录"
             app:av_tabTextSize="14sp"
             app:av_textColorNormal="#999999"
-            app:av_textColorSelected="#46c01b"/>
+            app:av_textColorSelected="#1296db"/>
 
         <com.lzy.widget.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            app:av_tabIconNormal="@mipmap/service_normal"
-            app:av_tabIconSelected="@mipmap/service_selected"
+            app:av_tabIconNormal="@mipmap/ic_location_normal"
+            app:av_tabIconSelected="@mipmap/ic_location"
             app:av_tabText="定位"
             app:av_tabTextSize="14sp"
             app:av_textColorNormal="#999999"
-            app:av_textColorSelected="#46c01b"/>
+            app:av_textColorSelected="#1296db"/>
 
         <com.lzy.widget.AlphaView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            app:av_tabIconNormal="@mipmap/mine_normal"
-            app:av_tabIconSelected="@mipmap/mine_selected"
+            app:av_tabIconNormal="@mipmap/ic_me_normal"
+            app:av_tabIconSelected="@mipmap/ic_me"
             app:av_tabText="我"
             app:av_tabTextSize="14sp"
             app:av_textColorNormal="#999999"
-            app:av_textColorSelected="#46c01b"/>
+            app:av_textColorSelected="#1296db"/>
     </com.lzy.widget.AlphaIndicator>
 </LinearLayout>
 
