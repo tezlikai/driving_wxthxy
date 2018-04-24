@@ -19,7 +19,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@mipmap/ic_launcher_round" />
+            android:background="@mipmap/app_logo_round" />
 
     </LinearLayout>
 
