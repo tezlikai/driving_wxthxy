@@ -6,6 +6,10 @@ package com.wxthxy.driving.model;
 
 public class GPSInformationBase {
 
+    private double latitude;
+
+    private double longitude;
+
     /**
      * 速度
      */
@@ -22,6 +26,22 @@ public class GPSInformationBase {
     private int direction;
 
     private boolean isTurnHead;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
     public int getSpeed() {
         return speed;
@@ -58,7 +78,9 @@ public class GPSInformationBase {
     @Override
     public String toString() {
         return "GPSInformationBase{" +
-                "speed=" + speed +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", speed=" + speed +
                 ", bearing=" + bearing +
                 ", direction=" + direction +
                 ", isTurnHead=" + isTurnHead +

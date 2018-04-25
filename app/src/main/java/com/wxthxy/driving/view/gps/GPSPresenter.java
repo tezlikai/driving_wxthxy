@@ -351,6 +351,8 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
         monitorTurnHead(bdLocation.getDirection());
 
         GPSInformationBase inforBase = new GPSInformationBase();
+        inforBase.setLatitude(bdLocation.getLatitude());
+        inforBase.setLongitude(bdLocation.getLongitude());
         inforBase.setSpeed((int) bdLocation.getSpeed());//速度
         inforBase.setBearing(bdLocation.getDirection());//方位
         int dir = changeBearingToDirection(bdLocation.getDirection());

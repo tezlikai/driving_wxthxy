@@ -8,6 +8,7 @@ import com.google.gson.annotations.Until;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.wxthxy.driving.util.TUtil;
 import com.wxthxy.driving.util.Utils;
 
@@ -23,6 +24,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+
+        FlowManager.init(getApplicationContext());
 
         /**
          * 日志管理
