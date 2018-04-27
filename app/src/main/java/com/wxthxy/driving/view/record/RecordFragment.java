@@ -1,5 +1,6 @@
 package com.wxthxy.driving.view.record;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,7 +20,9 @@ import com.wxthxy.driving.common.observer.ObserverHolder;
 import com.wxthxy.driving.database.LocationModel;
 import com.wxthxy.driving.mvp.MVPBaseFragment;
 import com.wxthxy.driving.view.record.adapter.RecordAdapter;
+import com.wxthxy.driving.view.record.detail.RecordDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +37,7 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
 
     private RecyclerView mRcvRecordContent;
     private RecordAdapter mAdapter;
-    private List<LocationModel> mDatas;
+    private List<LocationModel> mDatas = new ArrayList<>();
     private RecyclerRefreshLayout mRecyclerRefreshLayout;
 
     @Override
@@ -73,6 +76,7 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
             @Override
             public void onItemClick(View view, int position) {
                 Logger.d("position： = " + position);
+                toDetailPage(position);
             }
         });
         mRecyclerRefreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
@@ -83,6 +87,13 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
         });
 
 
+    }
+
+    private void toDetailPage(int position) {
+        LocationModel locationModel = mDatas.get(position);
+        Intent intent  = new Intent(getActivity(), RecordDetailActivity.class);
+        intent.putExtra("intent_data",locationModel);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -102,9 +113,8 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
     }
 
     @Override
-    public void setData(List<LocationModel> mDatas) {
-
-
+    public void setData(List<LocationModel> mDataList) {
+        mDatas = mDataList;
         Logger.d(TAG + "setData----------------");
         if (null != mAdapter) {
             mRecyclerRefreshLayout.setRefreshing(false);
