@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 
 @Table(database = DBFlowDatabase.class)
-public class LocationModel extends BaseModel{
+public class LocationModel extends BaseModel {
     @Column
     @PrimaryKey(autoincrement = true)
     public long id;

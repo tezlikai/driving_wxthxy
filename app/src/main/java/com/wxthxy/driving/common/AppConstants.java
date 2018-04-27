@@ -17,4 +17,8 @@ public class AppConstants {
 
     /*-- 判断车辆直行 --*/
     public static final int STRAIGHT_LINE = 0;
+
+    /*-- 数据保存成功 --*/
+    public static final String CAR_MESSAGE_SAVE = "car_message_save";
+    public static final int CAR_MESSAGE_SAVE_CODE = 0x01;
 }

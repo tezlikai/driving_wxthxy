@@ -9,17 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
-import com.raizlabs.android.dbflow.sql.language.Select;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.common.AppConstants;
+import com.wxthxy.driving.common.observer.ObserverHolder;
 import com.wxthxy.driving.database.LocationModel;
 import com.wxthxy.driving.model.GPSInformationBase;
 import com.wxthxy.driving.mvp.MVPBaseFragment;
 import com.wxthxy.driving.util.MapDistance;
 import com.wxthxy.driving.util.ToastUtil;
 import com.wxthxy.driving.view.custom.DashboardView;
-
-import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -166,6 +164,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                 mRightImg.setBackgroundResource(R.mipmap.gps_right);
                 mLeftImg.setBackgroundResource(R.mipmap.gps_left);
                 mHeadImg.setBackgroundResource(R.mipmap.gps_head);
+                ObserverHolder.getInstance().notifyObservers(AppConstants.CAR_MESSAGE_SAVE,AppConstants.CAR_MESSAGE_SAVE_CODE);
                 break;
         }
     }

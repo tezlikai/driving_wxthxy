@@ -73,4 +73,6 @@ dependencies {
     compile 'com.jaeger.statusbarutil:library:1.5.0'
     implementation files('libs/IndoorscapeAlbumPlugin.jar')
     implementation 'com.android.support:cardview-v7:28.0.0-alpha1'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.dinuscxj:recyclerrefreshlayout:2.0.5'
 }

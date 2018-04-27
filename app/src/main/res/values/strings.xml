@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">车信采集器</string>
+
+    <string name="car_time">开始时间:%1$s,结束时间：%2$s</string>
+
 </resources>

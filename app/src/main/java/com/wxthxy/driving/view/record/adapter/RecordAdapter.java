@@ -6,9 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.wxthxy.driving.R;
-import com.wxthxy.driving.model.CarMessage;
+import com.wxthxy.driving.database.LocationModel;
+import com.wxthxy.driving.util.ConvertUtils;
+import com.wxthxy.driving.util.TimeUtils;
 
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class RecordAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
 
-    private List<CarMessage> mData;
+    private List<LocationModel> mData;
 
     private final int NO_DATA = 0, HAS_DATA = 1;//无数据，有数据
 
@@ -44,20 +47,19 @@ public class RecordAdapter extends RecyclerView.Adapter {
         this.mContext = mContext;
     }
 
-    public RecordAdapter(Context mContext, List<CarMessage> mData) {
+    public RecordAdapter(Context mContext, List<LocationModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
 
-    public void setmData(List<CarMessage> mData) {
+    public void setmData(List<LocationModel> mData) {
         this.mData = mData;
     }
 
-    public void updateData(List<CarMessage> data) {
+    public void updateData(List<LocationModel> data) {
         this.mData = data;
         notifyDataSetChanged();
     }
-
 
 
     /**
@@ -96,13 +98,17 @@ public class RecordAdapter extends RecyclerView.Adapter {
         if (null == mData || mData.size() <= 0) { //无数据的情况
             return;
         }
-        switch (getItemViewType(position)){
+        switch (getItemViewType(position)) {
             case HAS_DATA:
                 RecordViewHolder imageViewHolder = (RecordViewHolder) holder;
+                LocationModel locationModel = mData.get(position);
+                imageViewHolder.mCarStartTime.setText("开始时间： "+TimeUtils.millis2String(locationModel.startTime * 1000L, "yyyy年MM月dd日 HH:mm:ss"));
+                imageViewHolder.mCarEndTime.setText("结束时间： "+TimeUtils.millis2String(locationModel.endTime * 1000L, "yyyy年MM月dd日 HH:mm:ss"));
+                imageViewHolder.mCarTotalMileage.setText("行驶里程数 ： " + locationModel.totalmileage);
                 imageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(onItemClickListener != null){
+                        if (onItemClickListener != null) {
                             onItemClickListener.onItemClick(v, position);
                         }
                     }
@@ -114,7 +120,13 @@ public class RecordAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return null == mData ? 1 : mData.size(); // 正常数据为空的情况下返回0，这里在数据为空的情况下返回1，为了显示无数据的布局
+//        return null == mData ? 1 : mData.size(); // 正常数据为空的情况下返回0，这里在数据为空的情况下返回1，为了显示无数据的布局
+
+        if (null == mData || mData.size() == 0) {
+            return 1;
+        } else {
+            return mData.size();
+        }
     }
 
     /**
@@ -132,8 +144,15 @@ public class RecordAdapter extends RecyclerView.Adapter {
      */
     public static class RecordViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView mCarStartTime;
+        private TextView mCarEndTime;
+        private TextView mCarTotalMileage;
+
         public RecordViewHolder(View itemView) {
             super(itemView);
+            mCarStartTime = itemView.findViewById(R.id.tv_car_time);
+            mCarEndTime = itemView.findViewById(R.id.tv_car_end_time);
+            mCarTotalMileage = itemView.findViewById(R.id.tv_car_total_mileage);
         }
     }
 

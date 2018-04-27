@@ -5,31 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="4dp"
-    app:contentPadding="10dp">
-    <RelativeLayout
+    android:layout_margin="@dimen/dp_16">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin">
-
-        <ImageView
-            android:id="@+id/iv_patient_portrait"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_default_avatar"/>
+        android:orientation="vertical"
+        android:padding="@dimen/dp_16">
 
         <RelativeLayout
-            android:id="@+id/rl_head_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_patient_portrait"
-            android:paddingLeft="@dimen/activity_horizontal_margin">
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8">
 
             <TextView
-                android:id="@+id/tv_start_time"
-                android:layout_width="120dp"
+                android:id="@+id/tv_car_time"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:maxEms="16"
@@ -38,33 +29,42 @@
                 android:text="2017-06-07 12:00"
                 android:textColor="@color/black"
                 android:textSize="14sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8">
 
             <TextView
-                android:id="@+id/tv_total_mileage"
+                android:id="@+id/tv_car_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxEms="16"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="2017-06-07 12:00"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_8">
+
+            <TextView
+                android:id="@+id/tv_car_total_mileage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:maxEms="8"
                 android:text="32km"
                 android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_patient_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl_head_view"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="19dp"
-            android:layout_toRightOf="@id/iv_patient_portrait"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="2017-06-07 12:00"
-            android:textColor="#666666"
-            android:textSize="14sp"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>
