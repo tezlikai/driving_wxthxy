@@ -33,7 +33,7 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
     /**
      * 设定一个标准值，两次方位值在标准范围内则说明方向未发生变化，否则判断方向
      */
-    private static final float STANDARD_ANGLE = 10f;
+    private static final float STANDARD_ANGLE = 15f;
 
     /**
      * 判断是否调头的警戒值
@@ -87,8 +87,8 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
                 Logger.d("监测到大于警戒值 " + num);
                 isTurnHead = true;
             } else {
-                Logger.d("监测到小于警戒值 " + num);
                 isTurnHead = false;
+                Logger.d("监测到小于警戒值 " + num);
             }
 
             num = 0;
@@ -288,10 +288,17 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
      */
     private int changeBearingToDirection(float bearing) {
         if (previousBearing != 0f) {
-            if (bearing - previousBearing >= STANDARD_ANGLE) {
+            float s = bearing - previousBearing;
+            if (s <= -180) {
                 previousBearing = bearing;
                 return AppConstants.TRUN_RIGHT;
-            } else if (previousBearing - bearing > STANDARD_ANGLE) {
+            } else if (s >= 180) {
+                previousBearing = bearing;
+                return AppConstants.TRUN_LEFT;
+            } else if (s >= STANDARD_ANGLE) {
+                previousBearing = bearing;
+                return AppConstants.TRUN_RIGHT;
+            } else if (s < STANDARD_ANGLE) {
                 previousBearing = bearing;
                 return AppConstants.TRUN_LEFT;
             } else {
@@ -312,7 +319,13 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
     private void monitorTurnHead(float bearing) {
         if (mNextBearing != DEFAULT_VALUE_NEGATIVE) {//mNextBearing被赋过值
             //记录每次差值并相加，当到达计算时间时如果num值可以作为判断
-            num = num + bearing - mNextBearing;
+            float s = bearing - mNextBearing;
+            if (s <= -180) {
+                s = 360 - mNextBearing + bearing;
+            } else if (s >= 180) {
+                s = 360 - bearing + mNextBearing;
+            }
+            num = num + s;
             Logger.d("每次差值相加 num = " + num);
             if (num >= TRUN_HEAD_VIGILANCE) {
                 Logger.d("监测到大于警戒值 " + num);

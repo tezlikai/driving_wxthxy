@@ -123,7 +123,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                 mEnd.setEnabled(false);
                 mPresenter.setOnGPSInforListener(null);
 //                mPresenter.removeGPS();
-                showToast("关闭GPS,行驶距离" + mDistance + "右转次数 = " + mCountTurnRight + " 左转次数 = " + mCountTurnLeft + " 调头次数 = " + mCountTurnHead);
+//                showToast("关闭GPS,行驶距离" + mDistance + "右转次数 = " + mCountTurnRight + " 左转次数 = " + mCountTurnLeft + " 调头次数 = " + mCountTurnHead);
                 endTime = System.currentTimeMillis() / 1000;
 
                 //保存数据到数据库
