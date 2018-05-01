@@ -116,7 +116,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                 mPresenter.getBaiduInfor();
                 mPresenter.setOnGPSInforListener(this);
                 startTime = System.currentTimeMillis() / 1000;
-                showToast("开启GPS");
+//                showToast("开启GPS");
                 break;
             case R.id.end_btn:
                 mStart.setBackgroundResource(R.mipmap.gps_btn);
@@ -188,7 +188,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
         preLatitude = infor.getLatitude();
         preLongitude = infor.getLongitude();
 
-        showToast(infor.toString());
+//        showToast(infor.toString());
     }
 
     @Override
