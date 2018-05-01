@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Driving.iml" filepath="$PROJECT_DIR$/Driving.iml" />
       <module fileurl="file://E:\bishe\driving_wxthxy\Driving.iml" filepath="E:\bishe\driving_wxthxy\Driving.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/driving_wxthxy.iml" filepath="$PROJECT_DIR$/.idea/driving_wxthxy.iml" />

@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.orhanobut.logger.Logger;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.common.AppConstants;
+import com.wxthxy.driving.util.SpUtils;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
 import com.wxthxy.driving.widget.CircleProgressbar;
 
@@ -49,7 +50,7 @@ public class SplashActivity extends MVPBaseActivity<SplashContract.View, SplashP
      */
     private void initView() {
 
-//        isFrist = (boolean) SpUtils.get(this, AppConstants.SP_FIRSTOPEN, true);
+        isFrist = (boolean) SpUtils.get(this, AppConstants.SP_FIRSTOPEN, true);
         mCircleProgressbar = findViewById(R.id.tv_red_skip);
         mCircleProgressbar.setOutLineColor(Color.TRANSPARENT);
         mCircleProgressbar.setInCircleColor(Color.parseColor("#505559"));
@@ -100,7 +101,7 @@ public class SplashActivity extends MVPBaseActivity<SplashContract.View, SplashP
                 Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION};
-//        SpUtils.put(this, AppConstants.SP_FIRSTOPEN, false);
+        SpUtils.put(this, AppConstants.SP_FIRSTOPEN, false);
         if (EasyPermissions.hasPermissions(this, parms)) {//设置权限
             //TODO: 有对应权限的操作
             mCircleProgressbar.reStart();
