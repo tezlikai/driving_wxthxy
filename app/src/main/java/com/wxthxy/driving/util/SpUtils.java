@@ -2,251 +2,202 @@ package com.wxthxy.driving.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.Nullable;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
-import java.util.Set;
 
-/**
- * <pre>
- *     desc  : SP相关工具类
- * </pre>
- */
-public final class SPUtils {
+public class SpUtils {
 
-    private SharedPreferences sp;
-    private SharedPreferences.Editor editor;
-
-    /**
-     * SPUtils构造函数
-     * <p>在Application中初始化</p>
-     *
-     * @param spName spName
-     */
-    public SPUtils(String spName) {
-        sp = Utils.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
-        editor = sp.edit();
-        editor.apply();
+    public SpUtils()
+    {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**
-     * SP中写入String类型value
-     *
-     * @param key   键
-     * @param value 值
+     * 保存在手机里面的文件名
      */
-    public void put(String key, @Nullable String value) {
-        editor.putString(key, value).apply();
+    public static final String FILE_NAME = "share_data";
+
+    /**
+     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
+     *
+     * @param context
+     * @param key
+     * @param object
+     */
+    public static void put(Context context, String key, Object object)
+    {
+
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (object instanceof String)
+        {
+            editor.putString(key, (String) object);
+        } else if (object instanceof Integer)
+        {
+            editor.putInt(key, (Integer) object);
+        } else if (object instanceof Boolean)
+        {
+            editor.putBoolean(key, (Boolean) object);
+        } else if (object instanceof Float)
+        {
+            editor.putFloat(key, (Float) object);
+        } else if (object instanceof Long)
+        {
+            editor.putLong(key, (Long) object);
+        } else
+        {
+            editor.putString(key, object.toString());
+        }
+
+        SharedPreferencesCompat.apply(editor);
     }
 
     /**
-     * SP中读取String
+     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
      *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code null}
+     * @param context
+     * @param key
+     * @param defaultObject
+     * @return
      */
-    public String getString(String key) {
-        return getString(key, null);
+    public static Object get(Context context, String key, Object defaultObject)
+    {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+
+        if (defaultObject instanceof String)
+        {
+            return sp.getString(key, (String) defaultObject);
+        } else if (defaultObject instanceof Integer)
+        {
+            return sp.getInt(key, (Integer) defaultObject);
+        } else if (defaultObject instanceof Boolean)
+        {
+            return sp.getBoolean(key, (Boolean) defaultObject);
+        } else if (defaultObject instanceof Float)
+        {
+            return sp.getFloat(key, (Float) defaultObject);
+        } else if (defaultObject instanceof Long)
+        {
+            return sp.getLong(key, (Long) defaultObject);
+        }
+
+        return null;
     }
 
     /**
-     * SP中读取String
+     * 移除某个 key 值已经对应的值
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
+     * @param context
+     * @param key
      */
-    public String getString(String key, String defaultValue) {
-        return sp.getString(key, defaultValue);
+    public static void remove(Context context, String key)
+    {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        SharedPreferencesCompat.apply(editor);
     }
 
     /**
-     * SP中写入int类型value
+     * 清除所有数据
      *
-     * @param key   键
-     * @param value 值
+     * @param context
      */
-    public void put(String key, int value) {
-        editor.putInt(key, value).apply();
+    public static void clear(Context context)
+    {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        SharedPreferencesCompat.apply(editor);
     }
 
     /**
-     * SP中读取int
+     * 查询某个 key 是否已经存在
      *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
+     * @param context
+     * @param key
+     * @return
      */
-    public int getInt(String key) {
-        return getInt(key, -1);
-    }
-
-    /**
-     * SP中读取int
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public int getInt(String key, int defaultValue) {
-        return sp.getInt(key, defaultValue);
-    }
-
-    /**
-     * SP中写入long类型value
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(String key, long value) {
-        editor.putLong(key, value).apply();
-    }
-
-    /**
-     * SP中读取long
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
-     */
-    public long getLong(String key) {
-        return getLong(key, -1L);
-    }
-
-    /**
-     * SP中读取long
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public long getLong(String key, long defaultValue) {
-        return sp.getLong(key, defaultValue);
-    }
-
-    /**
-     * SP中写入float类型value
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(String key, float value) {
-        editor.putFloat(key, value).apply();
-    }
-
-    /**
-     * SP中读取float
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值-1
-     */
-    public float getFloat(String key) {
-        return getFloat(key, -1f);
-    }
-
-    /**
-     * SP中读取float
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public float getFloat(String key, float defaultValue) {
-        return sp.getFloat(key, defaultValue);
-    }
-
-    /**
-     * SP中写入boolean类型value
-     *
-     * @param key   键
-     * @param value 值
-     */
-    public void put(String key, boolean value) {
-        editor.putBoolean(key, value).apply();
-    }
-
-    /**
-     * SP中读取boolean
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code false}
-     */
-    public boolean getBoolean(String key) {
-        return getBoolean(key, false);
-    }
-
-    /**
-     * SP中读取boolean
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public boolean getBoolean(String key, boolean defaultValue) {
-        return sp.getBoolean(key, defaultValue);
-    }
-
-    /**
-     * SP中写入String集合类型value
-     *
-     * @param key    键
-     * @param values 值
-     */
-    public void put(String key, @Nullable Set<String> values) {
-        editor.putStringSet(key, values).apply();
-    }
-
-    /**
-     * SP中读取StringSet
-     *
-     * @param key 键
-     * @return 存在返回对应值，不存在返回默认值{@code null}
-     */
-    public Set<String> getStringSet(String key) {
-        return getStringSet(key, null);
-    }
-
-    /**
-     * SP中读取StringSet
-     *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
-     */
-    public Set<String> getStringSet(String key, @Nullable Set<String> defaultValue) {
-        return sp.getStringSet(key, defaultValue);
-    }
-
-    /**
-     * SP中获取所有键值对
-     *
-     * @return Map对象
-     */
-    public Map<String, ?> getAll() {
-        return sp.getAll();
-    }
-
-    /**
-     * SP中移除该key
-     *
-     * @param key 键
-     */
-    public void remove(String key) {
-        editor.remove(key).apply();
-    }
-
-    /**
-     * SP中是否存在该key
-     *
-     * @param key 键
-     * @return {@code true}: 存在<br>{@code false}: 不存在
-     */
-    public boolean contains(String key) {
+    public static boolean contains(Context context, String key)
+    {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
         return sp.contains(key);
     }
 
     /**
-     * SP中清除所有数据
+     * 返回所有的键值对
+     *
+     * @param context
+     * @return
      */
-    public void clear() {
-        editor.clear().apply();
+    public static Map<String, ?> getAll(Context context)
+    {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        return sp.getAll();
     }
+
+    /**
+     * 创建一个解决 SharedPreferencesCompat.apply 方法的一个兼容类
+     *
+     * @author zhy
+     *
+     */
+    private static class SharedPreferencesCompat
+    {
+        private static final Method sApplyMethod = findApplyMethod();
+
+        /**
+         * 反射查找 apply 的方法
+         *
+         * @return
+         */
+        @SuppressWarnings({ "unchecked", "rawtypes" })
+        private static Method findApplyMethod()
+        {
+            try
+            {
+                Class clz = SharedPreferences.Editor.class;
+                return clz.getMethod("apply");
+            } catch (NoSuchMethodException e)
+            {
+            }
+
+            return null;
+        }
+
+        /**
+         * 如果找到则使用 apply 执行，否则使用 commit
+         *
+         * @param editor
+         */
+        public static void apply(SharedPreferences.Editor editor)
+        {
+            try
+            {
+                if (sApplyMethod != null)
+                {
+                    sApplyMethod.invoke(editor);
+                    return;
+                }
+            } catch (IllegalArgumentException e)
+            {
+            } catch (IllegalAccessException e)
+            {
+            } catch (InvocationTargetException e)
+            {
+            }
+            editor.commit();
+        }
+    }
+
 }

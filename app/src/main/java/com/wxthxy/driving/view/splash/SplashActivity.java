@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import com.orhanobut.logger.Logger;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.common.AppConstants;
-import com.wxthxy.driving.util.SpUtils;
 import com.wxthxy.driving.mvp.MVPBaseActivity;
+import com.wxthxy.driving.util.SpUtils;
 import com.wxthxy.driving.widget.CircleProgressbar;
 
 import java.util.List;
