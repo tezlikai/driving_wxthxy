@@ -151,6 +151,10 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                     mLocationModel.isTurnLeft = false;
                     mLocationModel.turnLeftSize = 0;
                 }
+                long timeMinutes = (endTime - startTime) / 60;
+                double averageVelocity = mDistance / timeMinutes;   //km/min
+                mLocationModel.averageVelocity = new Double(averageVelocity).longValue();
+
                 mLocationModel.totalmileage = Math.round(mDistance);
                 mLocationModel.save();
 
@@ -164,7 +168,7 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                 mRightImg.setBackgroundResource(R.mipmap.gps_right);
                 mLeftImg.setBackgroundResource(R.mipmap.gps_left);
                 mHeadImg.setBackgroundResource(R.mipmap.gps_head);
-                ObserverHolder.getInstance().notifyObservers(AppConstants.CAR_MESSAGE_SAVE,AppConstants.CAR_MESSAGE_SAVE_CODE);
+                ObserverHolder.getInstance().notifyObservers(AppConstants.CAR_MESSAGE_SAVE, AppConstants.CAR_MESSAGE_SAVE_CODE);
                 break;
         }
     }

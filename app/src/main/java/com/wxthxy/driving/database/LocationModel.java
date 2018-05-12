@@ -31,9 +31,16 @@ public class LocationModel extends BaseModel implements Serializable{
 
     /**
      * 车辆行驶里程
+     * km
      */
     @Column
     public long totalmileage;
+    /**
+     * 平均速度
+     * km/min
+     */
+    @Column
+    public long averageVelocity;
 
     /**
      * 车辆掉头
