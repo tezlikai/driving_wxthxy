@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.wxthxy.driving.mvp.BasePresenterImpl;
+import com.wxthxy.driving.view.login.LoginActivity;
 import com.wxthxy.driving.view.main.MainActivity;
 
 /**
@@ -15,7 +16,7 @@ public class SplashPresenter extends BasePresenterImpl<SplashContract.View> impl
 
     @Override
     public void toMainPage() {
-        Intent intent = new Intent(mView.getContext(), MainActivity.class);
+        Intent intent = new Intent(mView.getContext(), LoginActivity.class);
         mView.getContext().startActivity(intent);
         mView.finishActivity();
     }

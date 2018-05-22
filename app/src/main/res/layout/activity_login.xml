@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@mipmap/bg_login"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black"
+        android:textSize="24dp" />
+
+    <com.wxthxy.driving.widget.ClearableEditText
+        android:id="@+id/et_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_login"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:hint="@string/account_login_hint"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/account_login_hint"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/dividing_line_account"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <com.wxthxy.driving.widget.ClearableEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_account"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:hint="@string/password_login_hint"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textColorHint="@color/account_login_hint"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/dividing_line_password"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="58dp">
+
+        <TextView
+            android:id="@+id/bt_login"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_password"
+            android:layout_gravity="center"
+            android:background="@mipmap/bt_login_normal"
+            android:gravity="center"
+            android:text="@string/text_login"
+            android:textColor="@color/white" />
+
+        <ProgressBar
+            android:id="@+id/iv_login_loading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="38dp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

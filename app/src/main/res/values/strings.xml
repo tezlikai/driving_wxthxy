@@ -3,4 +3,10 @@
 
     <string name="car_time">开始时间:%1$s,结束时间：%2$s</string>
 
+    <string name="text_login">登 录</string>
+    <string name="account_login_hint">账号</string>
+    <string name="password_login_hint">密码</string>
+    <string name="verification_code_hint">字符不区分大小写</string>
+    <string name="error_name_pass">用户名或密码错误</string>
+
 </resources>

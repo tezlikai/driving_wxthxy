@@ -75,6 +75,10 @@
             android:name=".view.main.MainActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".view.login.LoginActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 声明service组件 -->
         <service
             android:name="com.baidu.location.f"
@@ -90,6 +94,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.me.aboutHibeauty.AboutHibeautyActivity"
             android:screenOrientation="portrait" />
@@ -102,7 +107,10 @@
         <activity
             android:name=".view.me.setting.SettingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".view.record.detail.RecordDetailActivity"></activity>
+        <activity
+            android:name=".view.record.detail.RecordDetailActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>
