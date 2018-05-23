@@ -1,5 +1,6 @@
 package com.wxthxy.driving.view.record;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,15 +13,18 @@ import android.view.ViewGroup;
 
 import com.dinuscxj.refresh.RecyclerRefreshLayout;
 import com.orhanobut.logger.Logger;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.common.AppConstants;
 import com.wxthxy.driving.common.observer.IObservable;
 import com.wxthxy.driving.common.observer.IObserver;
 import com.wxthxy.driving.common.observer.ObserverHolder;
 import com.wxthxy.driving.database.LocationModel;
+import com.wxthxy.driving.database.LocationModel_Table;
 import com.wxthxy.driving.mvp.MVPBaseFragment;
 import com.wxthxy.driving.view.record.adapter.RecordAdapter;
 import com.wxthxy.driving.view.record.detail.RecordDetailActivity;
+import com.wxthxy.driving.widget.CommonDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
     private RecordAdapter mAdapter;
     private List<LocationModel> mDatas = new ArrayList<>();
     private RecyclerRefreshLayout mRecyclerRefreshLayout;
+    private CommonDialog mDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +54,8 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
     private IObserver mObserver = new IObserver() {
         @Override
         public void onMessageReceived(IObservable observable, Object msg, int flag) {
-            Logger.d("msg:= "+"-----------"+"flag:="+flag);
-            if (AppConstants.CAR_MESSAGE_SAVE_CODE == flag){
+            Logger.d("msg:= " + "-----------" + "flag:=" + flag);
+            if (AppConstants.CAR_MESSAGE_SAVE_CODE == flag) {
                 mPresenter.loadingData();
             }
         }
@@ -78,6 +83,26 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
                 Logger.d("position： = " + position);
                 toDetailPage(position);
             }
+
+            @Override
+            public void onItemLongClick(View view, final long position) {
+                mDialog = new CommonDialog(mView.getContext(), "确定要删除吗?", new CommonDialog.OnClickListener() {
+                    @Override
+                    public void onClick(Dialog dialog, boolean confirm) {
+                        if (confirm) {
+                            mDialog.dismiss();
+                            SQLite.delete()
+                                    .from(LocationModel.class)
+                                    .where(LocationModel_Table.id.eq(position))
+                                    .query();
+                            mPresenter.loadingData();
+                        } else {
+                            mDialog.dismiss();
+                        }
+                    }
+                });
+                mDialog.show();
+            }
         });
         mRecyclerRefreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
             @Override
@@ -85,14 +110,12 @@ public class RecordFragment extends MVPBaseFragment<RecordContract.View, RecordP
                 mPresenter.loadingData();
             }
         });
-
-
     }
 
     private void toDetailPage(int position) {
         LocationModel locationModel = mDatas.get(position);
-        Intent intent  = new Intent(getActivity(), RecordDetailActivity.class);
-        intent.putExtra("intent_data",locationModel);
+        Intent intent = new Intent(getActivity(), RecordDetailActivity.class);
+        intent.putExtra("intent_data", locationModel);
         getActivity().startActivity(intent);
     }
 

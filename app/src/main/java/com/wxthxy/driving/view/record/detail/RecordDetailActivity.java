@@ -24,6 +24,7 @@ public class RecordDetailActivity extends MVPBaseActivity<RecordDetailContract.V
     private TextView mTurnLeftSize;
     private TextView mTurnRightSize;
     private TextView mMileage;
+    private TextView mSpeed;
     private LocationModel mData;
 
     @Override
@@ -53,6 +54,7 @@ public class RecordDetailActivity extends MVPBaseActivity<RecordDetailContract.V
         mEndTime = findViewById(R.id.tv_endt_time);
         mTurnLeftSize = findViewById(R.id.tv_turn_left);
         mTurnRightSize = findViewById(R.id.tv_turn_right);
+        mSpeed = findViewById(R.id.tv_speed);
         mMileage = findViewById(R.id.tv_mileage);
     }
 
@@ -63,6 +65,7 @@ public class RecordDetailActivity extends MVPBaseActivity<RecordDetailContract.V
             mEndTime.setText(TimeUtils.millis2String(mData.endTime * 1000L, "yyyy年MM月dd日 HH:mm:ss"));
             mTurnLeftSize.setText(mData.turnLeftSize + "");
             mTurnRightSize.setText(mData.turnRSize + "");
+            mSpeed.setText(mData.averageVelocity + "km/h");
             mMileage.setText(mData.totalmileage + " km");
         }
     }

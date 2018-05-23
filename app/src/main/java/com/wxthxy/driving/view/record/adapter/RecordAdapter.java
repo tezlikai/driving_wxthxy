@@ -2,6 +2,7 @@ package com.wxthxy.driving.view.record.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.database.LocationModel;
-import com.wxthxy.driving.util.ConvertUtils;
 import com.wxthxy.driving.util.TimeUtils;
 
 import java.util.List;
@@ -101,7 +101,7 @@ public class RecordAdapter extends RecyclerView.Adapter {
         switch (getItemViewType(position)) {
             case HAS_DATA:
                 RecordViewHolder imageViewHolder = (RecordViewHolder) holder;
-                LocationModel locationModel = mData.get(position);
+                final LocationModel locationModel = mData.get(position);
                 imageViewHolder.mCarStartTime.setText("开始时间： "+TimeUtils.millis2String(locationModel.startTime * 1000L, "yyyy年MM月dd日 HH:mm:ss"));
                 imageViewHolder.mCarEndTime.setText("结束时间： "+TimeUtils.millis2String(locationModel.endTime * 1000L, "yyyy年MM月dd日 HH:mm:ss"));
                 imageViewHolder.mCarTotalMileage.setText("行驶里程数 ： " + locationModel.totalmileage);
@@ -113,8 +113,16 @@ public class RecordAdapter extends RecyclerView.Adapter {
                         }
                     }
                 });
+                imageViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        onItemClickListener.onItemLongClick(view,locationModel.id);
+                        return false;
+                    }
+                });
                 break;
         }
+
 
     }
 
@@ -147,17 +155,20 @@ public class RecordAdapter extends RecyclerView.Adapter {
         private TextView mCarStartTime;
         private TextView mCarEndTime;
         private TextView mCarTotalMileage;
+        private CardView mCvItemView;
 
         public RecordViewHolder(View itemView) {
             super(itemView);
             mCarStartTime = itemView.findViewById(R.id.tv_car_time);
             mCarEndTime = itemView.findViewById(R.id.tv_car_end_time);
             mCarTotalMileage = itemView.findViewById(R.id.tv_car_total_mileage);
+            mCvItemView = itemView.findViewById(R.id.cv_item_view);
         }
     }
 
     public interface OnItemClickListener {
 
         void onItemClick(View view, int position);
+        void onItemLongClick(View view, long position);
     }
 }
