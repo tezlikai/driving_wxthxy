@@ -132,3 +132,5 @@
 4、数据库框架 DBFlow  https://github.com/Raizlabs/DBFlow
 
    具体使用参考：度娘
+
+5、登录用户名：admin 密码：123456    其它登录报错
