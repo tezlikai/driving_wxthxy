@@ -37,7 +37,7 @@ public class LocationModel extends BaseModel implements Serializable{
     public long totalmileage;
     /**
      * 平均速度
-     * km/min
+     * km/h
      */
     @Column
     public long averageVelocity;

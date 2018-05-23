@@ -151,8 +151,8 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                     mLocationModel.isTurnLeft = false;
                     mLocationModel.turnLeftSize = 0;
                 }
-                long timeMinutes = (endTime - startTime) / 60;
-                double averageVelocity = mDistance / timeMinutes;   //km/min
+                long timeHour = (endTime - startTime) / 60 / 60;
+                double averageVelocity = mDistance / timeHour;   //km/h
                 mLocationModel.averageVelocity = new Double(averageVelocity).longValue();
 
                 mLocationModel.totalmileage = Math.round(mDistance);
