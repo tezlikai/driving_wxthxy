@@ -19,6 +19,8 @@ import com.wxthxy.driving.util.MapDistance;
 import com.wxthxy.driving.util.ToastUtil;
 import com.wxthxy.driving.view.custom.DashboardView;
 
+import java.math.BigDecimal;
+
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -151,11 +153,14 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                     mLocationModel.isTurnLeft = false;
                     mLocationModel.turnLeftSize = 0;
                 }
-                long timeHour = (endTime - startTime) / 60 / 60;
-                double averageVelocity = mDistance / timeHour;   //km/h
-                mLocationModel.averageVelocity = new Double(averageVelocity).longValue();
+//                long timeHour = (endTime - startTime) / 60 / 60;
+                double averageVelocity = (double) mDistance / (endTime - startTime) * 3600;   //km/h
+                BigDecimal bg = new BigDecimal(averageVelocity);
+                mLocationModel.averageVelocity = bg.setScale(2, BigDecimal.ROUND_HALF_UP).longValue();
+                Logger.d("***************"+startTime+"-"+endTime+"-"+averageVelocity+" - "+bg.setScale(2, BigDecimal.ROUND_HALF_UP).longValue());
 
-                mLocationModel.totalmileage = Math.round(mDistance);
+                BigDecimal bg1 = new BigDecimal(mDistance);
+                mLocationModel.totalmileage = bg1.setScale(2, BigDecimal.ROUND_HALF_UP).longValue();
                 mLocationModel.save();
 
                 mDistance = 0d;
