@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.orhanobut.logger.Logger;
 import com.wxthxy.driving.R;
 import com.wxthxy.driving.common.AppConstants;
@@ -154,14 +156,14 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
                     mLocationModel.turnLeftSize = 0;
                 }
 //                long timeHour = (endTime - startTime) / 60 / 60;
-                double averageVelocity = (double) mDistance / (endTime - startTime) * 3600;   //km/h
+                double averageVelocity = (double) mDistance / (endTime - startTime) * 3.6;   //km/h
                 BigDecimal bg = new BigDecimal(averageVelocity);
-                mLocationModel.averageVelocity = bg.setScale(2, BigDecimal.ROUND_HALF_UP).longValue();
-                Logger.d("***************"+startTime+"-"+endTime+"-"+averageVelocity+" - "+bg.setScale(2, BigDecimal.ROUND_HALF_UP).longValue());
+                mLocationModel.averageVelocity = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
-                BigDecimal bg1 = new BigDecimal(mDistance);
-                mLocationModel.totalmileage = bg1.setScale(2, BigDecimal.ROUND_HALF_UP).longValue();
+                BigDecimal bg1 = new BigDecimal(mDistance / 1000);
+                mLocationModel.totalmileage = bg1.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 mLocationModel.save();
+                Logger.d("百度地图返回的值 " + startTime + "-" + endTime + "-" + mLocationModel.averageVelocity + "---" + mLocationModel.totalmileage);
 
                 mDistance = 0d;
                 mCountTurnLeft = 0;
@@ -192,7 +194,11 @@ public class GPSFragment extends MVPBaseFragment<GPSContract.View, GPSPresenter>
         dealDirectionDisplay(infor.getDirection(), infor.isTurnHead());
 
         if (preLongitude != 0d && preLatitude != 0d) {
-            mDistance = mDistance + MapDistance.getInstance().getLatLngDistance(preLongitude, preLatitude, infor.getLongitude(), infor.getLatitude());
+//            mDistance = mDistance + MapDistance.getInstance().getLatLngDistance(preLongitude, preLatitude, infor.getLongitude(), infor.getLatitude());
+            LatLng latLng1 = new LatLng(preLongitude, preLatitude);
+            LatLng latLng2 = new LatLng(infor.getLongitude(), infor.getLatitude());
+            mDistance = mDistance + DistanceUtil.getDistance(latLng1, latLng2);
+            Logger.d("百度地图返回的值:mDistance = " + mDistance + " lonStart = " + preLongitude + " latStart = " + preLatitude + " lonEnd = " + infor.getLongitude() + " latEnd = " + infor.getLatitude());
         }
         preLatitude = infor.getLatitude();
         preLongitude = infor.getLongitude();

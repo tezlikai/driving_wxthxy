@@ -35,6 +35,8 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
      */
     private static final float STANDARD_ANGLE = 15f;
 
+    private static final float STANDARD_ANGLE_OTHER = -15f;
+
     /**
      * 判断是否调头的警戒值
      */
@@ -298,7 +300,7 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
             } else if (s >= STANDARD_ANGLE) {
                 previousBearing = bearing;
                 return AppConstants.TRUN_RIGHT;
-            } else if (s < STANDARD_ANGLE) {
+            } else if (s < STANDARD_ANGLE_OTHER) {
                 previousBearing = bearing;
                 return AppConstants.TRUN_LEFT;
             } else {
@@ -371,6 +373,8 @@ public class GPSPresenter extends BasePresenterImpl<GPSContract.View> implements
         int dir = changeBearingToDirection(bdLocation.getDirection());
         inforBase.setDirection(dir);//方向
         inforBase.setTurnHead(isTurnHead);
-        infor.onGPSInfor(inforBase);
+        if (infor != null){
+            infor.onGPSInfor(inforBase);
+        }
     }
 }
